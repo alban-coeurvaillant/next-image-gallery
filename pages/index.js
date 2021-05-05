@@ -1,7 +1,15 @@
 // pages/index.js
 
 import Head from "next/head";
-import { Box, Container, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Text,
+  Wrap,
+  WrapItem,
+  Flex,
+  Spacer,
+} from "@chakra-ui/react";
 import { getCuratedPhotos } from "../lib/api";
 import React, { useState } from "react";
 import Image from "next/image";
@@ -16,7 +24,7 @@ export default function Home({ data }) {
         <title> NextJS Image Gallery</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box overflow="hidden" bg="purple.100" minH="100vh">
+      <Box overflow="hidden" bg="dark-lg" minH="100vh">
         <Container>
           <Text
             color="pink.800"
@@ -26,19 +34,30 @@ export default function Home({ data }) {
             textDecoration="underline"
             fontSize={["4xl", "4xl", "5xl", "5xl"]}
           >
-            NextJS Image Gallery
+            Welcome
           </Text>
         </Container>
-        {photos.map((pic) => (
-          <div>
-            <Image
-              src={pic.src.portrait}
-              height={600}
-              width={400}
-              alt={pic.photographer}
-            />
-          </div>
-        ))}
+
+        <Wrap className="test" px="1rem" spacing={4} justify="center">
+          {photos.map((pic) => (
+            <WrapItem
+              key={pic.id}
+              boxShadow="base"
+              rounded="20px"
+              overflow="hidden"
+              bg="white"
+              lineHeight="0"
+              _hover={{ boxShadow: "dark-lg" }}
+            >
+              <Image
+                src={pic.src.portrait}
+                height={600}
+                width={400}
+                alt={pic.photographer}
+              />
+            </WrapItem>
+          ))}
+        </Wrap>
       </Box>
     </div>
   );
